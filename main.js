@@ -7,11 +7,11 @@ window.onload = function () {
   function Load() {}
   Load.prototype = {
     preload: function() {
-
+      this.game.load.image('background', 'images/background.png');
     },
 
     create: function() {
-
+      this.game.add.sprite(0, 0, 'background');
     },
 
     update: function() {
