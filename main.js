@@ -1,6 +1,45 @@
 'use strict';
 
 window.onload = function () {
+
+  // Player
+  var Player = function(game, x, y, image_name) {
+    this.image_name = image_name;
+    this.game = game;
+    game.load.image(this.image_name, 'images/' + this.image_name + '.png');
+    this._x = x;
+    this._y = y;
+  }
+
+  Player.prototype = {
+    draw: function() {
+      this.image = this.game.add.sprite(this._x, this._y, this.image_name);
+    },
+
+    moveUp: function() {
+      this.y -= 3;
+    },
+
+    moveDown: function() {
+      this.y += 3;
+    },
+
+    moveLeft: function() {
+      this.x -= 3;
+    },
+
+    moveRight: function() {
+      this.x += 3;
+    },
+
+    get x() { return this.image.x; },
+    set x(newX) { this.image.x = newX; },
+    get y() { return this.image.y; },
+    set y(newY) { this.image.y = newY; }
+  };
+
+
+  // Game
   var game = new Phaser.Game(640, 480, Phaser.AUTO, 'jsgame');
   game.transparent = true;
 
@@ -8,32 +47,27 @@ window.onload = function () {
   Load.prototype = {
     preload: function() {
       this.game.load.image('background', 'images/background.png');
-      this.game.load.image('player', 'images/player.png');
+      this.player = new Player(this.game, 570, 400, 'player')
     },
 
     create: function() {
+      this.initKey();
       this.game.add.sprite(0, 0, 'background');
-      this.player = this.game.add.sprite(570, 400, 'player');
+      this.player.draw();
+    },
 
+    update: function() {
+      if (this.upKey.isDown) { this.player.moveUp(); }
+      if (this.downKey.isDown) { this.player.moveDown(); }
+      if (this.leftKey.isDown) { this.player.moveLeft(); }
+      if (this.rightKey.isDown) { this.player.moveRight(); }
+    },
+
+    initKey: function() {
       this.upKey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
       this.downKey = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
       this.leftKey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
       this.rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
-    },
-
-    update: function() {
-      if (this.upKey.isDown) {
-        this.player.y -= 3;
-      }
-      else if (this.downKey.isDown) {
-        this.player.y += 3;
-      }
-      if (this.leftKey.isDown) {
-        this.player.x -= 3;
-      }
-      else if (this.rightKey.isDown) {
-        this.player.x += 3;
-      }
     }
   };
 
