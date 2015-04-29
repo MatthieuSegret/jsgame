@@ -2,16 +2,16 @@
 
 window.onload = function () {
 
-  // Ruby
-  var Ruby = function(game, x, y, image_name) {
-    this.image_name = image_name || 'ruby';
+  // StaticOject
+  var StaticOject = function(game, x, y, image_name) {
+    this.image_name = image_name;
     this.game = game;
-    game.load.image(this.image_name, 'images/' + this.image_name + '.png');
+    this.game.load.image(this.image_name, 'images/' + this.image_name + '.png');
     this._x = x;
     this._y = y;
   }
 
-  Ruby.prototype = {
+  StaticOject.prototype = {
     draw: function() {
       this.image = this.game.add.sprite(this._x, this._y, this.image_name);
     },
@@ -23,40 +23,39 @@ window.onload = function () {
   };
 
 
-  // Player
-  var Player = function(game, x, y, image_name) {
-    this.image_name = image_name || 'player';
-    this.game = game;
-    game.load.image(this.image_name, 'images/' + this.image_name + '.png');
-    this._x = x;
-    this._y = y;
+  // Ruby hérite de StaticOject
+  var Ruby = function(game, x, y, image_name) {
+    this.image_name = image_name || 'ruby';
+    StaticOject.call(this, game, x, y, this.image_name);
   }
 
-  Player.prototype = {
-    draw: function() {
-      this.image = this.game.add.sprite(this._x, this._y, this.image_name);
-    },
+  Ruby.prototype.constructor = StaticOject;
+  Ruby.prototype = Object.create(StaticOject.prototype);
 
-    moveUp: function() {
-      this.y -= 3;
-    },
 
-    moveDown: function() {
-      this.y += 3;
-    },
+  // Player hérite de StaticOject
+  var Player = function(game, x, y, image_name) {
+    this.image_name = image_name || 'player';
+    StaticOject.call(this, game, x, y, this.image_name);
+  }
 
-    moveLeft: function() {
-      this.x -= 3;
-    },
+  Player.prototype = Object.create(StaticOject.prototype);
+  Player.prototype.constructor = StaticOject;
 
-    moveRight: function() {
-      this.x += 3;
-    },
+  Player.prototype.moveUp = function() {
+    this.y -= 3;
+  };
 
-    get x() { return this.image.x; },
-    set x(newX) { this.image.x = newX; },
-    get y() { return this.image.y; },
-    set y(newY) { this.image.y = newY; }
+  Player.prototype.moveDown = function() {
+    this.y += 3;
+  };
+
+  Player.prototype.moveLeft = function() {
+    this.x -= 3;
+  };
+
+  Player.prototype.moveRight = function() {
+    this.x += 3;
   };
 
 
