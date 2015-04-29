@@ -2,9 +2,30 @@
 
 window.onload = function () {
 
+  // Ruby
+  var Ruby = function(game, x, y, image_name) {
+    this.image_name = image_name || 'ruby';
+    this.game = game;
+    game.load.image(this.image_name, 'images/' + this.image_name + '.png');
+    this._x = x;
+    this._y = y;
+  }
+
+  Ruby.prototype = {
+    draw: function() {
+      this.image = this.game.add.sprite(this._x, this._y, this.image_name);
+    },
+
+    get x() { return this.image.x; },
+    set x(newX) { this.image.x = newX; },
+    get y() { return this.image.y; },
+    set y(newY) { this.image.y = newY; }
+  };
+
+
   // Player
   var Player = function(game, x, y, image_name) {
-    this.image_name = image_name;
+    this.image_name = image_name || 'player';
     this.game = game;
     game.load.image(this.image_name, 'images/' + this.image_name + '.png');
     this._x = x;
@@ -47,13 +68,15 @@ window.onload = function () {
   Load.prototype = {
     preload: function() {
       this.game.load.image('background', 'images/background.png');
-      this.player = new Player(this.game, 570, 400, 'player')
+      this.player = new Player(this.game, 570, 400);
+      this.ruby = new Ruby(this.game, 45, 95);
     },
 
     create: function() {
       this.initKey();
       this.game.add.sprite(0, 0, 'background');
       this.player.draw();
+      this.ruby.draw();
     },
 
     update: function() {
