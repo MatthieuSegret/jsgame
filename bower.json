@@ -1,0 +1,21 @@
+{
+  "name": "jsgame",
+  "version": "0.0.0",
+  "homepage": "https://github.com/MatthieuSegret/jsgame",
+  "authors": [
+    "Matthieu Segret <matthieu.segret@gmail.com>"
+  ],
+  "description": "Petit jeu développé avec **[PhaserJS](https://phaser.io)**. Celui-ci est inspiré de **[Ruby Game](https://github.com/HumanCoders/ruby_game)**, Ateliers de la **[formation Ruby](https://www.humancoders.com/formations/ruby)** chez **[Human Coders](https://www.humancoders.com)**.",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "bower_modules",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "phaser": "~2.3.0"
+  }
+}
