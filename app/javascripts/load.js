@@ -1,10 +1,11 @@
 'use strict';
 
-// Game
-var game = new Phaser.Game(640, 480, Phaser.AUTO, 'jsgame');
-game.transparent = true;
+var Ruby = require('./ruby');
+var Player = require('./player');
 
-function Load() {}
+// Load
+function Load() {};
+
 Load.prototype = {
   preload: function() {
     this.game.load.image('background', 'images/background.png');
@@ -27,9 +28,11 @@ Load.prototype = {
   },
 
   initKey: function() {
-    this.upKey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
-    this.downKey = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
-    this.leftKey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
-    this.rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+    this.upKey = this.game.input.keyboard.addKey(Phaser.Keyboard.UP);
+    this.downKey = this.game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+    this.leftKey = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+    this.rightKey = this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
   }
 };
+
+module.exports = Load;

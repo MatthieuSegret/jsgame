@@ -1,10 +1,14 @@
 'use strict';
 
-// Ruby hérite de StaticOject
+var StaticObject = require('./static_object');
+
+// Ruby hérite de StaticObject
 var Ruby = function(game, x, y, image_name) {
   this.image_name = image_name || 'ruby';
-  StaticOject.call(this, game, x, y, this.image_name);
+  StaticObject.call(this, game, x, y, this.image_name);
 }
 
-Ruby.prototype.constructor = StaticOject;
-Ruby.prototype = Object.create(StaticOject.prototype);
+Ruby.prototype.constructor = StaticObject;
+Ruby.prototype = Object.create(StaticObject.prototype);
+
+module.exports = Ruby;

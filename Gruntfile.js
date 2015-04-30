@@ -15,29 +15,39 @@ module.exports = function(grunt) {
       },
 
       js: {
-        src: [
-          "bower_modules/phaser/build/phaser.min.js",
-          "app/javascripts/static_object.js",
-          "app/javascripts/ruby.js",
-          "app/javascripts/player.js",
-          "app/javascripts/game.js",
-          "app/javascripts/app.js"
-        ]
+        vendor: [
+          "bower_modules/phaser/build/phaser.min.js"
+        ],
+        app: {
+          main: "app/javascripts/app.js",
+          compiled: "generated/js/app-bundle.js"
+        }
       }
     },
 
     // Configurations
+    browserify: {
+      app: {
+        files: {
+          "<%= files.js.app.compiled %>" : "<%= files.js.app.main %>"
+        }
+      }
+    },
+
     concat: {
       app: {
-        src: "<%= files.js.src %>",
+        src: [
+          "<%= files.js.vendor %>",
+          "<%= files.js.app.compiled %>"
+        ],
         dest: "generated/js/app.min.js"
       }
     },
 
     watch: {
       js: {
-        files: ["<%= files.js.src %>"],
-        tasks: ["concat"]
+        files: ["app/javascripts/**/*.js"],
+        tasks: ["browserify", "concat"]
       },
       css: {
         files: ["<%= files.css.src %>"],
@@ -75,6 +85,10 @@ module.exports = function(grunt) {
       web: {
         port: 3000
       }
+    },
+
+    clean: {
+      workspaces: 'generated'
     }
   });
 
@@ -86,5 +100,5 @@ module.exports = function(grunt) {
   require('matchdep').filterAll('grunt-*').forEach(grunt.loadNpmTasks);
 
   // Workflow
-  grunt.registerTask("default", ["concat", "copy", "server", "watch"]);
+  grunt.registerTask("default", ["browserify", "concat", "copy", "server", "watch"]);
 };

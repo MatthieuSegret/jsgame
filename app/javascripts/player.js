@@ -1,13 +1,15 @@
 'use strict';
 
-// Player hérite de StaticOject
+var StaticObject = require('./static_object');
+
+// Player hérite de StaticObject
 var Player = function(game, x, y, image_name) {
   this.image_name = image_name || 'player';
-  StaticOject.call(this, game, x, y, this.image_name);
+  StaticObject.call(this, game, x, y, this.image_name);
 }
 
-Player.prototype = Object.create(StaticOject.prototype);
-Player.prototype.constructor = StaticOject;
+Player.prototype = Object.create(StaticObject.prototype);
+Player.prototype.constructor = StaticObject;
 
 Player.prototype.moveUp = function() {
   this.y -= 3;
@@ -24,3 +26,5 @@ Player.prototype.moveLeft = function() {
 Player.prototype.moveRight = function() {
   this.x += 3;
 };
+
+module.exports = Player;
