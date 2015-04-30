@@ -17,7 +17,11 @@ module.exports = function(grunt) {
       js: {
         src: [
           "bower_modules/phaser/build/phaser.min.js",
-          "app/javascripts/**/*.js"
+          "app/javascripts/static_object.js",
+          "app/javascripts/ruby.js",
+          "app/javascripts/player.js",
+          "app/javascripts/game.js",
+          "app/javascripts/app.js"
         ]
       }
     },
