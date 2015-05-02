@@ -19,4 +19,8 @@ Monster.prototype.follow = function(target) {
   this.y -= dirY * 1;
 };
 
+Monster.prototype.touch = function(target) {
+  return Math.hypot(target.x - this.x, target.y - this.y) <= 30;
+};
+
 module.exports = Monster;

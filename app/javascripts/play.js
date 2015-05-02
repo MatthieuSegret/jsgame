@@ -5,18 +5,18 @@ var Player = require('./player');
 var Monster = require('./monster');
 
 // Load
-function Load() {};
+function Play() {};
 
-Load.prototype = {
+Play.prototype = {
   preload: function() {
     this.game.load.image('background', 'images/background.png');
     this.player = new Player(this.game, 570, 400);
     this.ruby = new Ruby(this.game, 45, 95);
     this.monster = new Monster(this.game, 100, 140);
+    this.initKey();
   },
 
   create: function() {
-    this.initKey();
     this.game.add.sprite(0, 0, 'background');
     this.player.draw();
     this.ruby.draw();
@@ -24,6 +24,11 @@ Load.prototype = {
   },
 
   update: function() {
+    if(this.monster.touch(this.player)) {
+      console.log('gameover');
+      this.game.state.start('gameover', false);
+    }
+
     if (this.upKey.isDown) { this.player.moveUp(); }
     if (this.downKey.isDown) { this.player.moveDown(); }
     if (this.leftKey.isDown) { this.player.moveLeft(); }
@@ -40,4 +45,4 @@ Load.prototype = {
   }
 };
 
-module.exports = Load;
+module.exports = Play;
