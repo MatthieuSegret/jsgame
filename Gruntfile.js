@@ -20,7 +20,7 @@ module.exports = function(grunt) {
         ],
         app: {
           main: "app/javascripts/app.js",
-          compiled: "generated/js/app-bundle.js"
+          compiled: "generated/js/app.min.js"
         }
       }
     },
@@ -28,26 +28,35 @@ module.exports = function(grunt) {
     // Configurations
     browserify: {
       app: {
+        options: {
+          browserifyOptions: {
+            debug: true
+          }
+        },
         files: {
           "<%= files.js.app.compiled %>" : "<%= files.js.app.main %>"
         }
       }
     },
 
-    concat: {
-      app: {
-        src: [
-          "<%= files.js.vendor %>",
-          "<%= files.js.app.compiled %>"
-        ],
-        dest: "generated/js/app.min.js"
+    concat_sourcemap: {
+      options: {
+        sourcesContent: true
+      },
+      vendor: {
+        src: "<%= files.js.vendor %>",
+        dest: "generated/js/vendor.min.js"
       }
     },
 
     watch: {
+      vendor: {
+        files: ["<%= files.js.vendor %>"],
+        tasks: ["concat_sourcemap"]
+      },
       js: {
         files: ["app/javascripts/**/*.js"],
-        tasks: ["browserify", "concat"]
+        tasks: ["browserify", "concat_sourcemap"]
       },
       css: {
         files: ["<%= files.css.src %>"],
@@ -100,5 +109,5 @@ module.exports = function(grunt) {
   require('matchdep').filterAll('grunt-*').forEach(grunt.loadNpmTasks);
 
   // Workflow
-  grunt.registerTask("default", ["browserify", "concat", "copy", "server", "watch"]);
+  grunt.registerTask("default", ["browserify", "concat_sourcemap", "copy", "server", "watch"]);
 };
