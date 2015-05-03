@@ -1,9 +1,9 @@
 'use strict';
 
-// Load
-function GameOver() {};
+// GameOver
+function GameOverState() {};
 
-GameOver.prototype = {
+GameOverState.prototype = {
   preload: function() {
 
   },
@@ -21,4 +21,4 @@ GameOver.prototype = {
   }
 };
 
-module.exports = GameOver;
+module.exports = GameOverState;

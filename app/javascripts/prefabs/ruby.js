@@ -1,6 +1,6 @@
 'use strict';
 
-var StaticObject = require('./static_object');
+var StaticObject = require('./staticObject');
 
 // Ruby hérite de StaticObject
 var Ruby = function(game, x, y, image_name) {

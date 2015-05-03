@@ -1,6 +1,6 @@
 'use strict';
 
-var StaticObject = require('./static_object');
+var StaticObject = require('./staticObject');
 
 // Player hérite de StaticObject
 var Player = function(game, x, y, image_name) {

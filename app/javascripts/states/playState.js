@@ -1,13 +1,13 @@
 'use strict';
 
-var Ruby = require('./ruby');
-var Player = require('./player');
-var Monster = require('./monster');
+var Ruby = require('../prefabs/ruby');
+var Player = require('../prefabs/player');
+var Monster = require('../prefabs/monster');
 
-// Load
-function Play() {};
+// Play
+function PlayState() {};
 
-Play.prototype = {
+PlayState.prototype = {
   preload: function() {
     this.game.load.image('background', 'images/background.png');
     this.player = new Player(this.game, 570, 400);
@@ -45,4 +45,4 @@ Play.prototype = {
   }
 };
 
-module.exports = Play;
+module.exports = PlayState;
