@@ -16,6 +16,7 @@ module.exports = function(grunt) {
 
       js: {
         vendor: [
+          "bower_modules/underscore/underscore-min.js",
           "bower_modules/phaser/build/phaser.min.js"
         ],
         app: {

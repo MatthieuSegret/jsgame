@@ -25,8 +25,11 @@ PlayState.prototype = {
 
   update: function() {
     if(this.monster.touch(this.player)) {
-      console.log('gameover');
       this.game.state.start('gameover', false);
+    }
+
+    if(this.player.touch(this.ruby)) {
+      this.game.state.start('win', false);
     }
 
     if (this.upKey.isDown) { this.player.moveUp(); }
