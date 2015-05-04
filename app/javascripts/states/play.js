@@ -21,16 +21,22 @@ Play.prototype = {
     this.ruby = new Ruby(this.game, 45, 95);
     this.game.add.existing(this.ruby);
 
-    this.monster = new Monster(this.game, 100, 140);
-    this.game.add.existing(this.monster	);
+    this.monsters = [];
+    var m;
+    _(4).times(_.bind(function(n){
+      m = new Monster(this.game, _.random(10, 450), _.random(10, 450));
+      this.monsters.push(m);
+      this.game.add.existing(m);
+    }, this));
   },
 
   update: function() {
-    this.monster.follow(this.player);
-
-    if(this.monster.touch(this.player)) {
-      this.game.state.start('gameover', false);
-    }
+    _.each(this.monsters, _.bind(function(monster) {
+      monster.follow(this.player);
+      if(monster.touch(this.player)) {
+        this.game.state.start('gameover', false);
+      }
+    }, this));
 
     if(this.player.touch(this.ruby)) {
       this.game.state.start('win', false);

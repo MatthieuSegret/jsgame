@@ -5,7 +5,7 @@ var StaticObject = require('./staticObject');
 
 // Player hérite de StaticObject
 var Monster = function(game, x, y, image_name) {
-  this.image_name = image_name || 'ghost1';
+  this.image_name = _.sample(['ghost1', 'ghost2', 'ghost3', 'dark_knight', 'hornet', 'undead', 'cactuar']);
   StaticObject.call(this, game, x, y, this.image_name);
 }
 Monster.prototype = Object.create(StaticObject.prototype);
