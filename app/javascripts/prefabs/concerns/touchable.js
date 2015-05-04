@@ -4,7 +4,7 @@
 var Touchable = function() {}
 
 Touchable.prototype.touch = function(target) {
-  return Math.hypot(target.x - this.x, target.y - this.y) <= 30;
+  return this.game.physics.arcade.overlap(this, target);
 };
 
 module.exports = Touchable;
