@@ -1,16 +1,16 @@
 'use strict';
 
-// Win
-function WinState() {};
+// GameOver
+function GameOver() {};
 
-WinState.prototype = {
+GameOver.prototype = {
   preload: function() {
 
   },
 
   create: function() {
     var style = { font: 'bold 55px Arial', fill: '#ffff00', align: 'center'};
-    this.titleText = this.game.add.text(this.game.world.centerX, 275, 'You win !', style);
+    this.titleText = this.game.add.text(this.game.world.centerX, 275, 'Game Over', style);
     this.titleText.anchor.setTo(0.5, 0.5);
   },
 
@@ -21,4 +21,4 @@ WinState.prototype = {
   }
 };
 
-module.exports = WinState;
+module.exports = GameOver;
