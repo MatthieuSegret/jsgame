@@ -2,22 +2,15 @@
 
 // StaticOject
 var StaticObject = function(game, x, y, image_name) {
-  this.image_name = image_name;
-  this.game = game;
-  this.game.load.image(this.image_name, 'images/' + this.image_name + '.png');
-  this._x = x;
-  this._y = y;
+  Phaser.Sprite.call(this, game, x, y, image_name);
+  //this.anchor.setTo(1, 1);
+  this.game.physics.enable(this, Phaser.Physics.ARCADE);
+  this.body.collideWorldBounds = true;
+  this.body.overlapX = 1;
+  this.body.overlapY = 1;
 }
 
-StaticObject.prototype = {
-  draw: function() {
-    this.image = this.game.add.sprite(this._x, this._y, this.image_name);
-  },
-
-  get x() { return this.image.x; },
-  set x(newX) { this.image.x = newX; },
-  get y() { return this.image.y; },
-  set y(newY) { this.image.y = newY; }
-};
+StaticObject.prototype = Object.create(Phaser.Sprite.prototype);
+StaticObject.prototype.constructor = StaticObject;
 
 module.exports = StaticObject;
