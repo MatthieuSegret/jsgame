@@ -111,4 +111,5 @@ module.exports = function(grunt) {
 
   // Workflow
   grunt.registerTask("default", ["browserify", "concat_sourcemap", "copy", "server", "watch"]);
+  grunt.registerTask("heroku:production", ["browserify", "concat_sourcemap", "copy"]);
 };
