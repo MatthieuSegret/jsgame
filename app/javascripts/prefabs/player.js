@@ -11,23 +11,25 @@ var Player = function(game, x, y, image_name) {
 Player.prototype = Object.create(StaticObject.prototype);
 Player.prototype.constructor = StaticObject;
 
+// Méthodes d'instance
+var instanceMethods = {
+
+  moveUp: function() {
+    this.y -= 3;
+  },
+  moveDown: function() {
+    this.y += 3;
+  },
+  moveLeft: function() {
+    this.x -= 3;
+  },
+  moveRight: function() {
+    this.x += 3;
+  }
+};
+
 // Mixins
 _.extend(Player.prototype, Touchable.prototype);
-
-Player.prototype.moveUp = function() {
-  this.y -= 3;
-};
-
-Player.prototype.moveDown = function() {
-  this.y += 3;
-};
-
-Player.prototype.moveLeft = function() {
-  this.x -= 3;
-};
-
-Player.prototype.moveRight = function() {
-  this.x += 3;
-};
+_.extend(Player.prototype, instanceMethods);
 
 module.exports = Player;

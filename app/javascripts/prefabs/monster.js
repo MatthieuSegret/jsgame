@@ -10,17 +10,19 @@ var Monster = function(game, x, y, image_name) {
 Monster.prototype = Object.create(StaticObject.prototype);
 Monster.prototype.constructor = StaticObject;
 
-// Mixins
-_.extend(Monster.prototype, Touchable.prototype);
+// Méthodes d'instance
+var instanceMethods = {
 
-Monster.prototype.follow = function(target) {
-  var dirX = this.x < target.x ? -1 : 1;
-  this.x -= dirX * 1;
+  follow: function(target) {
+    var dirX = this.x < target.x ? -1 : 1;
+    this.x -= dirX * 1;
 
-  var dirY = this.y < target.y ? -1 : 1;
-  this.y -= dirY * 1;
+    var dirY = this.y < target.y ? -1 : 1;
+    this.y -= dirY * 1;
+  }
 };
 
+// Méthodes static
 Monster.build = function(game, number) {
   var image_name;
   var monsters = [];
@@ -32,5 +34,9 @@ Monster.build = function(game, number) {
   }, this));
   return monsters;
 }
+
+// Mixins
+_.extend(Monster.prototype, Touchable.prototype);
+_.extend(Monster.prototype, instanceMethods);
 
 module.exports = Monster;
