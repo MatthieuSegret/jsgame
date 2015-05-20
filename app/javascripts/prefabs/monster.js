@@ -5,8 +5,7 @@ var StaticObject = require('./staticObject');
 
 // Player hérite de StaticObject
 var Monster = function(game, x, y, image_name) {
-  this.image_name = _.sample(['ghost1', 'ghost2', 'ghost3', 'dark_knight', 'hornet', 'undead', 'cactuar']);
-  StaticObject.call(this, game, x, y, this.image_name);
+  StaticObject.call(this, game, x, y, image_name);
 }
 Monster.prototype = Object.create(StaticObject.prototype);
 Monster.prototype.constructor = StaticObject;
@@ -21,5 +20,17 @@ Monster.prototype.follow = function(target) {
   var dirY = this.y < target.y ? -1 : 1;
   this.y -= dirY * 1;
 };
+
+Monster.build = function(game, number) {
+  var image_name;
+  var monsters = [];
+  var monster;
+  _(number).times(_.bind(function(n){
+    image_name = _.sample(['ghost1', 'ghost2', 'ghost3', 'dark_knight', 'hornet', 'undead', 'cactuar']);
+    monster = new Monster(game, _.random(10, 450), _.random(10, 450), image_name);
+    monsters.push(monster);
+  }, this));
+  return monsters;
+}
 
 module.exports = Monster;

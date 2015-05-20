@@ -16,17 +16,14 @@ Play.prototype = {
     this.game.add.sprite(0, 0, 'background');
 
     this.player = new Player(this.game, 570, 400);
-    this.game.add.existing(this.player);
-
     this.ruby = new Ruby(this.game, 45, 95);
-    this.game.add.existing(this.ruby);
+    this.monsters = Monster.build(this.game, 4);
 
-    this.monsters = [];
-    var m;
-    _(4).times(_.bind(function(n){
-      m = new Monster(this.game, _.random(10, 450), _.random(10, 450));
-      this.monsters.push(m);
-      this.game.add.existing(m);
+    // Ajoute les objets sur la scene de jeu
+    this.game.add.existing(this.player);
+    this.game.add.existing(this.ruby);
+    _.each(this.monsters, _.bind(function(monster) {
+      this.game.add.existing(monster);
     }, this));
   },
 
