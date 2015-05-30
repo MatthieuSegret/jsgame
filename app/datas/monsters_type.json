@@ -1,0 +1,35 @@
+{
+  ghost1: {
+    image_name: 'ghost1',
+    actions: [
+      { direction: 'moveUp', speed: 4, repeat: 40 },
+      { direction: 'moveDown', repeat: 80 }
+    ]
+  },
+
+  ghost2: {
+    image_name: 'ghost2',
+    actions: [
+      { direction: 'moveLeft', speed: 4, repeat: 40 },
+      { direction: 'moveRight', repeat: 80 }
+    ]
+  },
+
+  ghost3: {
+    image_name: 'ghost3',
+    speed: 1,
+    actions: [
+      { direction: 'moveUp', repeat: 80 },
+      { direction: 'moveLeft', repeat: 80 },
+      { direction: 'moveDown', repeat: 80 },
+      { direction: 'moveRight', repeat: 80 }
+    ]
+  },
+
+  dark_knight: {
+    image_name: 'dark_knight',
+    actions: [
+      { direction: 'follow', speed: 1 }
+    ]
+  }
+}

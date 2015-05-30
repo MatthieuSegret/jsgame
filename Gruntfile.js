@@ -14,6 +14,10 @@ module.exports = function(grunt) {
         src: "app/stylesheets/style.css"
       },
 
+      data: {
+        src: "app/datas/*.json"
+      },
+
       js: {
         vendor: [
           "bower_modules/underscore/underscore-min.js",
@@ -66,6 +70,10 @@ module.exports = function(grunt) {
       html: {
         files: ["<%= files.html.src %>"],
         tasks: ["copy"]
+      },
+      data: {
+        files: ["<%= files.data.src %>"],
+        tasks: ["browserify"]
       }
     },
 
@@ -85,6 +93,12 @@ module.exports = function(grunt) {
       image: {
         src: "app/images/*.png",
         dest: "generated/images/",
+        expand: true,
+        flatten: true
+      },
+      data: {
+        src: "<%= files.data.src %>",
+        dest: "generated/datas/",
         expand: true,
         flatten: true
       }
