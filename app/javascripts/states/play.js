@@ -3,7 +3,7 @@
 var Ruby = require('../prefabs/ruby');
 var Player = require('../prefabs/player');
 var Monster = require('../prefabs/monster');
-var monstersType = require('../../datas/monsters_type.json');
+var monstersData = require('../../datas/monsters.json');
 
 // Play
 function Play() {};
@@ -11,7 +11,6 @@ function Play() {};
 Play.prototype = {
   preload: function() {
     this.initKey();
-    Monster.define(monstersType);
   },
 
   create: function() {
@@ -19,12 +18,7 @@ Play.prototype = {
 
     this.player = new Player(this.game, 570, 400);
     this.ruby = new Ruby(this.game, 45, 95);
-    this.monsters = _.union(
-                      Monster.build(this.game, 'ghost1', 2),
-                      Monster.build(this.game, 'ghost2', 2),
-                      Monster.build(this.game, 'ghost3'),
-                      Monster.build(this.game, 'dark_knight')
-                    );
+    this.monsters = Monster.build(this.game, monstersData);
 
     // Ajoute les objets sur la scene de jeu
     this.game.add.existing(this.player);

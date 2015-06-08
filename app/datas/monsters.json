@@ -4,7 +4,8 @@
     actions: [
       { direction: 'moveUp', speed: 4, repeat: 40 },
       { direction: 'moveDown', repeat: 80 }
-    ]
+    ],
+    number: 2
   },
 
   ghost2: {
@@ -12,7 +13,8 @@
     actions: [
       { direction: 'moveLeft', speed: 4, repeat: 40 },
       { direction: 'moveRight', repeat: 80 }
-    ]
+    ],
+    number: 2
   },
 
   ghost3: {
@@ -23,13 +25,15 @@
       { direction: 'moveLeft', repeat: 80 },
       { direction: 'moveDown', repeat: 80 },
       { direction: 'moveRight', repeat: 80 }
-    ]
+    ],
+    number: 1
   },
 
   dark_knight: {
     image_name: 'dark_knight',
     actions: [
       { direction: 'follow', speed: 1 }
-    ]
+    ],
+    number: 1
   }
 }

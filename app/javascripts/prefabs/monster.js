@@ -44,21 +44,19 @@ var instanceMethods = {
 };
 
 // Méthodes static
-Monster.build = function(game, name, number) {
-  number = number || 1;
-  var monsterType = this.monstersType[name]
+Monster.build = function(game, monstersData) {
   var monsters = [];
+  var number;
   var monster;
-  _(number).times(_.bind(function(n){
-    monster = new Monster(game, _.random(10, 450), _.random(10, 450), monsterType.image_name);
-    monster.loadActions(monsterType.actions);
-    monsters.push(monster);
+  _.each(monstersData, _.bind(function(monsterType) {
+    number = monsterType.number || 1;
+    _(number).times(_.bind(function(n){
+      monster = new Monster(game, _.random(10, 450), _.random(10, 450), monsterType.image_name);
+      monster.loadActions(monsterType.actions);
+      monsters.push(monster);
+    }, this));
   }, this));
   return monsters;
-};
-
-Monster.define = function(monstersType) {
-  this.monstersType = monstersType;
 };
 
 // Mixins
